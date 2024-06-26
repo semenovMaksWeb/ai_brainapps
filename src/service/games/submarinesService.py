@@ -27,11 +27,11 @@ class SubmarinesService:
             pass
 
     def checkColorSubmarines():
-        checkcolorGreen = ImageService.seacrhColorImages(
+        checkColorGreen = ImageService.seacrhColorImages(
             screenSave + SubmarinesService.submarinesImage, 
             SubmarinesService.colorGreen
         )
-        if checkcolorGreen:
+        if checkColorGreen:
             return "green"
         return "orange"
     

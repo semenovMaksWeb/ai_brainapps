@@ -1,10 +1,6 @@
-from serivce.webbrowserService import WebbrowserService
-from serivce.actionService import ActionService
-
-import time
+from service.games.submarinesService import SubmarinesService
 
 def start():
-    WebbrowserService.open("game/play/Submarine")
-    time.sleep(2)
-    ActionService.clickRunButton()
+    SubmarinesService.start()
+
 start()

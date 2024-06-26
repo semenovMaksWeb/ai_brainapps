@@ -11,5 +11,12 @@ class ImageService:
         locations = []
         for y, x in zip(*np.where(result >= threshold)):
             locations.append((x, y))
-        print(locations)
         return locations
+    
+    def seacrhColorImages(url_image, color):
+        img = cv2.imread(url_image)
+        for row in img:
+            for pixel in row:
+                if pixel[0] == color[0] and pixel[1] == color[1] and pixel[2] == color[2]: 
+                    return True
+        return False

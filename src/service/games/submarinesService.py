@@ -36,33 +36,40 @@ class SubmarinesService:
         return "orange"
     
     def definePosition():
-        checkTop = ImageService.comparisonImages(
+        # TODO дописать функцию
+        image = ImageService.getGrayImages(
             screenSave + SubmarinesService.submarinesImage, 
-            screenSave + "const/submarines/orangeTop.png"
+            screenSave + "const/submarines/top.png"
         )
-        if len(checkTop) != 0:
-            return "top"
+        position = ImageService.getGrayImagesPosition(bit_image_find = image, url_image_from = screenSave + "const/submarines/head.png")
+        print(position)
+        # checkTop = ImageService.seacrhGrayImages(
+        #     screenSave + SubmarinesService.submarinesImage, 
+        #     screenSave + "const/submarines/orangeTop.png"
+        # )
+        # if len(checkTop) != 0:
+        #     return "top"
             
-        checkBottom = ImageService.comparisonImages(
-            screenSave + SubmarinesService.submarinesImage, 
-            screenSave + "const/submarines/orangeBottom.png"
-        )
-        if len(checkBottom) != 0:
-            return "bottom"
+        # checkBottom = ImageService.seacrhGrayImages(
+        #     screenSave + SubmarinesService.submarinesImage, 
+        #     screenSave + "const/submarines/orangeBottom.png"
+        # )
+        # if len(checkBottom) != 0:
+        #     return "bottom"
 
-        checkLeft = ImageService.comparisonImages(
-            screenSave + SubmarinesService.submarinesImage, 
-            screenSave + "const/submarines/orangeLeft.png"
-        )
-        if len(checkLeft) != 0:
-            return "left"
+        # checkLeft = ImageService.seacrhGrayImages(
+        #     screenSave + SubmarinesService.submarinesImage, 
+        #     screenSave + "const/submarines/orangeLeft.png"
+        # )
+        # if len(checkLeft) != 0:
+        #     return "left"
     
-        checkRight = ImageService.comparisonImages(
-            screenSave + SubmarinesService.submarinesImage, 
-            screenSave + "const/submarines/orangeRight.png"
-        )
-        if len(checkRight) != 0:
-            return "right"
+        # checkRight = ImageService.seacrhGrayImages(
+        #     screenSave + SubmarinesService.submarinesImage, 
+        #     screenSave + "const/submarines/orangeRight.png"
+        # )
+        # if len(checkRight) != 0:
+        #     return "right"
         
     def defineDirection():
         pass

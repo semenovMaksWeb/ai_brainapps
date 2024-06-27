@@ -13,7 +13,7 @@ class ActionService:
 
     # Нажать на кнопку запустить игру
     def clickRunButton():
-            image_screen_full = "screen_games.png"
+            image_screen_full = "generator/screen_games.png"
             ScreenService.screenshot(image_screen_full)
             locations = ImageService.comparisonImages(screenSave + image_screen_full, screenSave + "const/button_run.png")
             x = locations[0][0] + 15

@@ -1,12 +1,13 @@
 from service.imageService import ImageService
 from service.screenService import ScreenService
 from config import screenSave
+import keyboard
 
 import pyautogui
 
 class ActionService:
     def move(x, y):
-        pyautogui.moveTo(x = x, y = y)
+        pyautogui.moveTo(x = x, y = y, duration = 0.25)
     
     def click():
         pyautogui.click()
@@ -21,5 +22,11 @@ class ActionService:
             ActionService.move(x, y)
             ActionService.click()
     
-    def keyDown(key):
-        pyautogui.keyUp(key = key)
+    def checkButtonRestart(image):
+        locations = ImageService.comparisonImages(screenSave + image, screenSave + "const/button_restart.png")
+        if len(locations) != 0: 
+            return True
+        return False
+    
+    def keyDown(key):     
+        keyboard.press(key)

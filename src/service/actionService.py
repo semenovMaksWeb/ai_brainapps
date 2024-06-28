@@ -15,7 +15,7 @@ class ActionService:
     # Нажать на кнопку запустить игру
     def clickRunButton():
             image_screen_full = "generator/screen_games.png"
-            ScreenService.screenshot(image_screen_full)
+            ScreenService.screenshot(screenSave + image_screen_full)
             locations = ImageService.comparisonImages(screenSave + image_screen_full, screenSave + "const/button_run.png")
             x = locations[0][0] + 15
             y = locations[0][1] + 15
@@ -23,7 +23,7 @@ class ActionService:
             ActionService.click()
     
     def checkButtonRestart(image):
-        locations = ImageService.comparisonImages(screenSave + image, screenSave + "const/button_restart.png")
+        locations = ImageService.comparisonImages(image, screenSave + "const/button_restart.png")
         if len(locations) != 0: 
             return True
         return False

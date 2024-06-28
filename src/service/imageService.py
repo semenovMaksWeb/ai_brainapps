@@ -10,7 +10,7 @@ class ImageService:
 
 
     #  возвращает изображение учитывая цвет, все конвертируется в серый оттенок
-    def getGrayImages(url_image_find = None, url_image_from = None, path_save = None):
+    def getImages(url_image_find = None, url_image_from = None, path_save = None):
         findImage, fromImage = ImageService._getImageCheck(url_image_find,url_image_from,)
         positon = ImageService._getPositionImage(findImage, fromImage)
         cv2.imwrite(path_save, findImage[positon[0]:positon[1], positon[2]:positon[3]])
@@ -38,16 +38,14 @@ class ImageService:
         cv2.imshow("Image", image)
         cv2.waitKey(0)
 
-    def comparisonImages(url_image_find, url_image_from):
+    def comparisonImages(url_image_find, url_image_from, type = cv2.TM_CCOEFF_NORMED):
         findImage = cv2.imread(url_image_find)
         fromImage = cv2.imread(url_image_from)
-        result = cv2.matchTemplate(findImage, fromImage, cv2.TM_CCOEFF_NORMED)
+        result = cv2.matchTemplate(findImage, fromImage, type)
         threshold = 0.8
         locations = []
-
         for y, x in zip(*np.where(result >= threshold)):
             locations.append((x, y)) 
-        
         return locations
     
     def seacrhColorImages(url_image, color):

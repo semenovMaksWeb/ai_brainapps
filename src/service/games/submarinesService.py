@@ -1,38 +1,90 @@
 from service.screenService import ScreenService
 from service.imageService import ImageService
+from service.imageService2 import ImageService2
 from service.actionService import ActionService
 from service.webbrowserService import WebbrowserService
+from service.historyService import HistoryService
 from config import screenSave
 
 import time
 
 class SubmarinesService:
     url = "https://brainapps.ru/game/play/Submarine"
-    submarinesImage = "generator/submarines.png"
+    submarinesImage = screenSave + "generator/submarines.png"
+    submarinesImageHead = screenSave + "const/submarines/head.png"
+    submarinesImagePole = screenSave + "generator/pole.png"
     submarinesImageElement = "generator/submarinesElement.png"
     colorGreen = (61, 252, 140)
     colorOrange = (65, 180, 250) 
-    colorPosition = (167,167,167)       
-
+    colorPosition = (167,167,167)
+    
     def start():
         WebbrowserService.open("game/play/Submarine")
-        time.sleep(2)
+        time.sleep(12)
         ActionService.clickRunButton()
         time.sleep(5)
         while(True):
-            time.sleep(2)
+            time.sleep(1)
             ScreenService.screenshot(SubmarinesService.submarinesImage)
-            checkRestart = ActionService.checkButtonRestart("generator/submarines.png")
-            print("checkRestart", checkRestart)
+            checkRestart = ActionService.checkButtonRestart(SubmarinesService.submarinesImage)
             if checkRestart: 
                 break
+            SubmarinesService.generatorImagePole()
+            image = SubmarinesService.findImageHead()
+            print("image [0][0] and [0][1]", image[0][0], image[0][0])
+            HistoryService.saveImg(image, "find_submarines")
+            key = None
+            if image[0][0] == 146 and image[0][1] == 145:
+                key = "up"
+            if image[0][0] == 146 and image[0][1] == 146:
+                key = "left"
+            if image[0][0] == 63:
+                key = "down"
+            if image[0][0] == 180:
+                key = "right"
+            if key is None:
+                print("bag click - up")
+                key = "up"
+            print(key)
+            ActionService.keyDown(key)
+
+    # создает обрезанное поле
+    def generatorImagePole():
+        image = ImageService2.splitImage(
+            path_file = SubmarinesService.submarinesImage,
+            h = 480,
+            w = 1800,
+            x = 0,
+            y = 250
+        )
+        ImageService2.saveImage(SubmarinesService.submarinesImagePole, image)
+
+    # Поиск изображении
+    def findImageHead():
+        return ImageService2.findObjectImage(SubmarinesService.submarinesImagePole, SubmarinesService.submarinesImageHead)
+
+
+    def start2():
+        # WebbrowserService.open("game/play/Submarine")
+        # time.sleep(2)
+        # ActionService.clickRunButton()
+        # time.sleep(5)
+        # while(True):
+            time.sleep(1)
+            # ScreenService.screenshot(SubmarinesService.submarinesImage)
+            checkRestart = ActionService.checkButtonRestart(SubmarinesService.submarinesImage)
+            print("checkRestart", checkRestart)
+            # if checkRestart: 
+                # break
             
             checkColor = SubmarinesService.checkColorSubmarines()
             print("checkColor", checkColor)
             if checkColor == "orange":
+                print("orange")
                 position = SubmarinesService.definePosition()
                 ActionService.keyDown(position)
             if checkColor == "green":
+                print("green")
                 # TODO Времянка
                 ActionService.keyDown("top")
 
@@ -47,7 +99,7 @@ class SubmarinesService:
     
     def definePosition():
         # TODO дописать функцию
-        ImageService.getGrayImages(
+        ImageService.getImages(
             screenSave + SubmarinesService.submarinesImage, 
             screenSave + "const/submarines/top.png",
             screenSave + SubmarinesService.submarinesImageElement,

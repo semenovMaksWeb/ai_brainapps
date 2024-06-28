@@ -11,7 +11,7 @@ import time
 class SubmarinesService:
     url = "https://brainapps.ru/game/play/Submarine"
     submarinesImage = screenSave + "generator/submarines.png"
-    submarinesImageHead = screenSave + "const/submarines/head.png"
+    submarinesTemplate = screenSave + "const/submarines/submarinesTemplate.png"
     submarinesImagePole = screenSave + "generator/pole.png"
     submarinesImageElement = "generator/submarinesElement.png"
     colorGreen = (61, 252, 140)
@@ -19,13 +19,13 @@ class SubmarinesService:
     colorPosition = (167,167,167)
     
     def start():
-        WebbrowserService.open("game/play/Submarine")
-        time.sleep(12)
-        ActionService.clickRunButton()
-        time.sleep(5)
+        # WebbrowserService.open("game/play/Submarine")
+        # time.sleep(5)
+        # ActionService.clickRunButton()
+        # time.sleep(5)
         while(True):
             time.sleep(1)
-            ScreenService.screenshot(SubmarinesService.submarinesImage)
+            # ScreenService.screenshot(SubmarinesService.submarinesImage)
             checkRestart = ActionService.checkButtonRestart(SubmarinesService.submarinesImage)
             if checkRestart: 
                 break
@@ -34,13 +34,13 @@ class SubmarinesService:
             print("image [0][0] and [0][1]", image[0][0], image[0][0])
             HistoryService.saveImg(image, "find_submarines")
             key = None
-            if image[0][0] == 146 and image[0][1] == 145:
+            if image[0][0] == 127 or image[0][0] == 134:
                 key = "up"
-            if image[0][0] == 146 and image[0][1] == 146:
+            if image[0][0] == 146:
                 key = "left"
             if image[0][0] == 63:
                 key = "down"
-            if image[0][0] == 180:
+            if image[0][0] == 187 or image[0][0] == 180:
                 key = "right"
             if key is None:
                 print("bag click - up")
@@ -61,7 +61,7 @@ class SubmarinesService:
 
     # Поиск изображении
     def findImageHead():
-        return ImageService2.findObjectImage(SubmarinesService.submarinesImagePole, SubmarinesService.submarinesImageHead)
+        return ImageService2.findObjectImage(SubmarinesService.submarinesImagePole, SubmarinesService.submarinesTemplate)
 
 
     def start2():

@@ -31,8 +31,9 @@ class ImageService2:
 
     # Найти изображение в изображение без учитывание его угла положения
     def findObjectImage(path_image, path_template):
-        img = cv.imread(path_image, cv.IMREAD_GRAYSCALE)
-        template = cv.imread(path_template, cv.IMREAD_GRAYSCALE)
+        img = cv.imread(path_image)
+        template = cv.imread(path_template)
+        print(template)
         w, h = template.shape[::-1]
         res = cv.matchTemplate(img, template, cv.TM_CCOEFF_NORMED)
         min_val, max_val, min_loc, max_loc = cv.minMaxLoc(res)

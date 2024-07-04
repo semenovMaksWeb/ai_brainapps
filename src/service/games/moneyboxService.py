@@ -9,6 +9,7 @@ class MoneyboxService:
     pathLevelScreen = screenSave + "generator/moneybox.png"
     pathPole = screenSave + "generator/moneybox_pole.png"
     pathLevelTemplate = screenSave + "const/moneybox/level.png"
+    pathMany = screenSave + "const/moneybox/many.png"
 
     def start():
         WebbrowserService.open("game/play/PiggyBank")
@@ -18,7 +19,14 @@ class MoneyboxService:
         time.sleep(2)
         ScreenService.screenshot(MoneyboxService.pathLevelScreen)
         MoneyboxService.findLevel()
+        time.sleep(5)
+        MoneyboxService.runGames()
         pass
+
+    def runGames():
+        ScreenService.screenshot(MoneyboxService.pathLevelScreen)
+        locations = ImageService.comparisonImages(MoneyboxService.pathLevelScreen, MoneyboxService.pathMany)
+        print(locations)
 
     def findLevel():
         locations = ImageService.comparisonImages(MoneyboxService.pathLevelScreen, MoneyboxService.pathLevelTemplate)

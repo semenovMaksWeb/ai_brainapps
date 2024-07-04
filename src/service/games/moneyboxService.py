@@ -12,14 +12,18 @@ class MoneyboxService:
 
     def start():
         WebbrowserService.open("game/play/PiggyBank")
-        time.sleep(5)
+        time.sleep(3)
         ScreenService.screenshot(MoneyboxService.pathLevelScreen)
         ActionService.clickRunButton()
-        ActionService.saveScreen(MoneyboxService.pathLevelScreen, MoneyboxService.pathPole)
+        time.sleep(2)
+        ScreenService.screenshot(MoneyboxService.pathLevelScreen)
         MoneyboxService.findLevel()
         pass
 
     def findLevel():
-        res = ImageService.comparisonImages(MoneyboxService.pathPole, MoneyboxService.pathLevelTemplate)
-        print(res)
+        locations = ImageService.comparisonImages(MoneyboxService.pathLevelScreen, MoneyboxService.pathLevelTemplate)
+        x = locations[0][0] + 15
+        y = locations[0][1] + 15
+        ActionService.move(x, y)
+        ActionService.click()
         pass

@@ -30,3 +30,13 @@ class ActionService:
         if len(locations) != 0: 
             return True
         return False
+    
+    def saveScreen(path_file, save_path):
+        image = ImageService.splitImage(
+            path_file = path_file,
+            h = 480,
+            w = 1800,
+            x = 0,
+            y = 250
+        )
+        ImageService.saveImage(save_path, image)

@@ -19,34 +19,34 @@ class SubmarinesService:
     colorPosition = (167,167,167)
     
     def start():
-        # WebbrowserService.open("game/play/Submarine")
-        # time.sleep(5)
-        # ActionService.clickRunButton()
-        # time.sleep(5)
+        WebbrowserService.open("game/play/Submarine")
+        time.sleep(5)
+        ActionService.clickRunButton()
+        time.sleep(5)
         while(True):
             time.sleep(1)
-            # ScreenService.screenshot(SubmarinesService.submarinesImage)
+            ScreenService.screenshot(SubmarinesService.submarinesImage)
             checkRestart = ActionService.checkButtonRestart(SubmarinesService.submarinesImage)
             if checkRestart: 
                 break
             SubmarinesService.generatorImagePole()
             image = SubmarinesService.findImageHead()
-            print("image [0][0] and [0][1]", image[0][0], image[0][0])
-            HistoryService.saveImg(image, "find_submarines")
-            key = None
-            if image[0][0] == 127 or image[0][0] == 134:
-                key = "up"
-            if image[0][0] == 146:
-                key = "left"
-            if image[0][0] == 63:
-                key = "down"
-            if image[0][0] == 187 or image[0][0] == 180:
-                key = "right"
-            if key is None:
-                print("bag click - up")
-                key = "up"
-            print(key)
-            ActionService.keyDown(key)
+            # print("image [0][0] and [0][1]", image[0][0], image[0][0])
+            # HistoryService.saveImg(image, "find_submarines")
+            # key = None
+            # if image[0][0] == 127 or image[0][0] == 134:
+            #     key = "up"
+            # if image[0][0] == 146:
+            #     key = "left"
+            # if image[0][0] == 63:
+            #     key = "down"
+            # if image[0][0] == 187 or image[0][0] == 180:
+            #     key = "right"
+            # if key is None:
+            #     print("bag click - up")
+            #     key = "up"
+            # print(key)
+            # ActionService.keyDown(key)
 
     # создает обрезанное поле
     def generatorImagePole():
@@ -61,7 +61,9 @@ class SubmarinesService:
 
     # Поиск изображении
     def findImageHead():
-        return ImageService2.findObjectImage(SubmarinesService.submarinesImagePole, SubmarinesService.submarinesTemplate)
+        res = ImageService2.outlineImage(SubmarinesService.submarinesImagePole)
+        HistoryService.saveImg(res, "test.png")
+        # return ImageService2.findObjectImage(SubmarinesService.submarinesImagePole, SubmarinesService.submarinesTemplate)
 
 
     def start2():

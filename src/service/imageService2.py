@@ -18,10 +18,11 @@ class ImageService2:
 
         # отображаем контуры поверх изображения
         cv.drawContours(img, contours, -1, (255,0,0), 3, cv.LINE_AA, hierarchy, 1 )
-        cv.imshow('contours', img) # выводим итоговое изображение в окно
+        return img
+        # cv.imshow('contours', img) # выводим итоговое изображение в окно
 
-        cv.waitKey()
-        cv.destroyAllWindows()
+        # cv.waitKey()
+        # cv.destroyAllWindows()
 
     # Обрезать изображение
     def splitImage(path_file, y, x, h, w):

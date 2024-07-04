@@ -1,5 +1,4 @@
 from config import urlSite
-
 import webbrowser
 
 class WebbrowserService:

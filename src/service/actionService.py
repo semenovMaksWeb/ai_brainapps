@@ -12,6 +12,9 @@ class ActionService:
     def click():
         pyautogui.click()
 
+    def keyDown(key):     
+        keyboard.press(key)
+
     # Нажать на кнопку запустить игру
     def clickRunButton():
             image_screen_full = "generator/screen_games.png"
@@ -27,6 +30,3 @@ class ActionService:
         if len(locations) != 0: 
             return True
         return False
-    
-    def keyDown(key):     
-        keyboard.press(key)
